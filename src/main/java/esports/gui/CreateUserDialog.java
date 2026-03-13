@@ -21,7 +21,6 @@ public class CreateUserDialog extends JDialog {
         JPanel root = new JPanel(new BorderLayout());
         root.setBackground(Theme.BG_PANEL);
 
-        // header
         JPanel header = new JPanel(new FlowLayout(FlowLayout.LEFT, 12, 10));
         header.setBackground(Theme.BG_CARD);
         header.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Theme.BORDER_SUBTLE));

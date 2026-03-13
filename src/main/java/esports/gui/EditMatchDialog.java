@@ -40,7 +40,6 @@ public class EditMatchDialog extends JDialog {
         JPanel root = new JPanel(new BorderLayout());
         root.setBackground(Theme.BG_PANEL);
 
-        // ── Header bar ────────────────────────────────────────────────────────
         JPanel header = new JPanel(new FlowLayout(FlowLayout.LEFT, 12, 10));
         header.setBackground(Theme.BG_CARD);
         header.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Theme.BORDER_SUBTLE));
@@ -50,7 +49,6 @@ public class EditMatchDialog extends JDialog {
         header.add(titleLbl);
         root.add(header, BorderLayout.NORTH);
 
-        // ── Form ──────────────────────────────────────────────────────────────
         JPanel form = new JPanel(new GridBagLayout());
         form.setBackground(Theme.BG_PANEL);
         form.setBorder(BorderFactory.createEmptyBorder(16, 20, 8, 20));
@@ -78,7 +76,6 @@ public class EditMatchDialog extends JDialog {
             form.add((Component) rows[i][1], g);
         }
 
-        // hint
         JLabel hint = new JLabel("<html><i>Победитель должен совпадать с Командой 1 или Командой 2</i></html>");
         hint.setFont(Theme.FONT_SMALL);
         hint.setForeground(Theme.TEXT_SECONDARY);
@@ -87,7 +84,6 @@ public class EditMatchDialog extends JDialog {
 
         root.add(form, BorderLayout.CENTER);
 
-        // ── Footer buttons ────────────────────────────────────────────────────
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 10));
         footer.setBackground(Theme.BG_CARD);
         footer.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Theme.BORDER_SUBTLE));
@@ -99,7 +95,6 @@ public class EditMatchDialog extends JDialog {
         footer.add(saveBtn);
         root.add(footer, BorderLayout.SOUTH);
 
-        // ── Pre-fill ──────────────────────────────────────────────────────────
         if (rec != null) {
             dateField.setText(rec.getMatchDate());
             durationField.setText(rec.getMatchDuration());

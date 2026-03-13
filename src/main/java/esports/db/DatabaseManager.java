@@ -35,6 +35,39 @@ public class DatabaseManager {
         return DriverManager.getConnection(url, p);
     }
 
+    /**
+     * Автоматически создаёт базу данных и заливает setup.sql если база не существует.
+     * Если база уже есть — всё равно перезаливает setup.sql чтобы роли/права были актуальны.
+     */
+    public void autoInitDb(String dbName) {
+        try {
+            // Проверяем существует ли база
+            boolean exists;
+            try (Connection c = pgConnect("postgres");
+                 PreparedStatement ps = c.prepareStatement("SELECT 1 FROM pg_database WHERE datname=?")) {
+                ps.setString(1, dbName);
+                try (ResultSet rs = ps.executeQuery()) {
+                    exists = rs.next();
+                }
+            }
+
+            if (!exists) {
+                // Создаём базу
+                try (Connection c = pgConnect("postgres");
+                     Statement st = c.createStatement()) {
+                    c.setAutoCommit(true);
+                    st.execute("CREATE DATABASE \"" + dbName + "\"");
+                }
+            }
+
+            // В любом случае заливаем setup.sql — идемпотентно
+            runSetupViaJdbc(dbName);
+
+        } catch (Exception e) {
+            System.err.println("autoInitDb warning: " + e.getMessage());
+        }
+    }
+
     public List<String> listDatabases() {
         List<String> dbs = new ArrayList<>();
         try (Connection c = pgConnect("postgres");
@@ -186,6 +219,9 @@ public class DatabaseManager {
     }
 
     public void login(String dbName, String appUser, String appPass) throws Exception {
+        // Автоматически создаём и инициализируем базу если нужно
+        autoInitDb(dbName);
+
         String role;
         try (Connection c = pgConnectAs(dbName, "es_guest", GUEST_ROLE_PASS);
              PreparedStatement ps = c.prepareStatement("SELECT fn_app_login(?,?)")) {
@@ -208,10 +244,6 @@ public class DatabaseManager {
 
         if (conn != null && !conn.isClosed()) conn.close();
         conn = pgConnectAs(dbName, jdbcUser, jdbcPass);
-        try (PreparedStatement dbg = conn.prepareStatement("SELECT current_user");
-            ResultSet dbgRs = dbg.executeQuery()) {
-            if (dbgRs.next()) System.out.println(">>> CONNECTED AS: " + dbgRs.getString(1));
-        }
         conn.setAutoCommit(true);
         this.currentUser = appUser;
         this.currentRole = role;
@@ -229,7 +261,7 @@ public class DatabaseManager {
         } catch (SQLException e) {
             String msg = e.getMessage();
             if (msg != null && msg.contains("does not exist")) {
-                throw new Exception("База данных не инициализирована. Нажмите 'Инициализировать'.");
+                throw new Exception("База данных не инициализирована.");
             }
             throw new Exception(cleanMsg(msg));
         }
@@ -266,8 +298,7 @@ public class DatabaseManager {
 
     public void addMatchRecord(MatchRecord r) throws SQLException {
         requireConnection();
-        try (PreparedStatement ps = conn.prepareStatement(
-                "CALL sp_add_match(?,?,?,?,?,?,?,?)")) {
+        try (PreparedStatement ps = conn.prepareStatement("CALL sp_add_match(?,?,?,?,?,?,?,?)")) {
             ps.setString(1, r.getMatchDate());
             ps.setString(2, r.getMatchDuration());
             ps.setString(3, r.getTournament());

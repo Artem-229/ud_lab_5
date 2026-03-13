@@ -36,7 +36,6 @@ public class MainWindow extends JFrame {
         getContentPane().setBackground(Theme.BG_DARK);
         setLayout(new BorderLayout(0, 0));
 
-        // ── Top bar ────────────────────────────────────────────────────────────
         JPanel topBar = new JPanel(new BorderLayout());
         topBar.setBackground(Theme.BG_CARD);
         topBar.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Theme.BORDER_SUBTLE));
@@ -62,7 +61,6 @@ public class MainWindow extends JFrame {
 
         add(topBar, BorderLayout.NORTH);
 
-        // ── Table ──────────────────────────────────────────────────────────────
         String[] cols = {"ID", "Дата", "Длит.", "Турнир", "Игра", "Формат", "Команда 1", "Команда 2", "Победитель"};
         tableModel = new DefaultTableModel(cols, 0) {
             @Override public boolean isCellEditable(int r, int c) { return false; }
@@ -79,7 +77,6 @@ public class MainWindow extends JFrame {
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
-        // alternating rows
         table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable t, Object v, boolean sel, boolean foc, int row, int col) {
@@ -109,7 +106,6 @@ public class MainWindow extends JFrame {
         scroll.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Theme.BORDER_SUBTLE));
         add(scroll, BorderLayout.CENTER);
 
-        // ── Status bar ──────────────────────────────────────────────────────────
         statusBar = new JLabel(" ");
         statusBar.setFont(Theme.FONT_SMALL);
         statusBar.setForeground(Theme.TEXT_SECONDARY);
@@ -132,7 +128,6 @@ public class MainWindow extends JFrame {
                 BorderFactory.createEmptyBorder(12, 8, 12, 8)));
         panel.setPreferredSize(new Dimension(195, 600));
 
-        // Search section
         addSectionHeader(panel, "🔍  Поиск по турниру");
         searchField = new JTextField();
         Theme.styleField(searchField);
