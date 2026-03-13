@@ -1,0 +1,11 @@
+esports\db\DatabaseManager.class
+esports\gui\MainWindow$1.class
+esports\gui\MainWindow$2.class
+esports\Main.class
+esports\model\MatchRecord.class
+esports\gui\MainWindow.class
+esports\gui\WelcomeDialog.class
+esports\db\DatabaseManager$PartialImportException.class
+esports\gui\Theme.class
+esports\gui\CreateUserDialog.class
+esports\gui\EditMatchDialog.class

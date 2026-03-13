@@ -1,0 +1,62 @@
+[
+  {
+    "match_date": "2024-03-15",
+    "match_duration": "01:42:30",
+    "tournament": "IEM Katowice 2024",
+    "game": "Counter-Strike 2",
+    "format": "Bo3",
+    "team1": "Natus Vincere",
+    "team2": "Team Vitality",
+    "winner": "Team Vitality"
+  },
+  {
+    "match_date": "2024-03-16",
+    "match_duration": "02:15:00",
+    "tournament": "IEM Katowice 2024",
+    "game": "Counter-Strike 2",
+    "format": "Bo5",
+    "team1": "FaZe Clan",
+    "team2": "G2 Esports",
+    "winner": "FaZe Clan"
+  },
+  {
+    "match_date": "2024-04-01",
+    "match_duration": "00:58:44",
+    "tournament": "ESL Pro League S19",
+    "game": "Counter-Strike 2",
+    "format": "Bo1",
+    "team1": "ENCE",
+    "team2": "OG",
+    "winner": "ENCE"
+  },
+  {
+    "match_date": "2024-04-10",
+    "match_duration": "01:30:00",
+    "tournament": "The International 2024",
+    "game": "Dota 2",
+    "format": "Bo3",
+    "team1": "Team Spirit",
+    "team2": "Gaimin Gladiators",
+    "winner": "Team Spirit"
+  },
+  {
+    "match_date": "2024-05-05",
+    "match_duration": "02:05:17",
+    "tournament": "MSI 2024",
+    "game": "League of Legends",
+    "format": "Bo5",
+    "team1": "T1",
+    "team2": "Gen.G",
+    "winner": "T1"
+  },
+  {
+    "match_date": "2024-05-20",
+    "match_duration": "00:45:22",
+    "tournament": "VCT Masters Tokyo",
+    "game": "Valorant",
+    "format": "Bo3",
+    "team1": "Sentinels",
+    "team2": "LOUD",
+    "winner": "LOUD"
+  }
+]
